@@ -1,3 +1,3 @@
-const baseUrl = "http://localhost:5000/api"; // Your base URL for the API
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default baseUrl;

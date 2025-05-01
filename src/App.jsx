@@ -1,24 +1,26 @@
-import React from 'react';
-import DisplayAllBlogs from './components/DisplayAllBlogs';  // Import the DisplayAllBlogs component
-import CreateBlog from './components/CreateBlog';
 
-const App = () => {
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import Blogs from './components/Blogs';
+import BlogDetails from './components/BlogDetails';
+function App() {
+  const isAuthenticated = localStorage.getItem('token');
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-start py-10">
-      
-      {/* Header */}
-    
-
-      {/* Main content */}
-      <div className="w-full max-w-4xl p-6 mt-20">
-        <h1 className="text-3xl font-extrabold text-center text-gray-900 mb-6">Welcome to Our Blog</h1>
-
-        {/* Display All Blogs */}
-        <div className="w-full max-w-4xl p-6 mt-20"><DisplayAllBlogs /> </div>
-        
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/blogs"
+          element={isAuthenticated ? <Blogs /> : <Navigate to="/login" />}
+        />
+        // In your router configuration
+        <Route path="/blogs/details/:id" element={<BlogDetails />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;
