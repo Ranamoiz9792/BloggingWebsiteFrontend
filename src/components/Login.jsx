@@ -30,6 +30,7 @@ function Login() {
       alert('Login successful!');
       navigate('/blogs');
     } catch (err) {
+      console.log("Error abcd 00000000000000000000000000000000000000000: ", err);
       if (err.errors) {
         const newErrors = {};
         err.errors.forEach((e) => {
